@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+  body{
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1{
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  form{
+    width: 50%;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #999;
+    margin-top: 30px;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"]{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 15px;
+  }
+
+  input[type="submit"]{
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover{
+    background-color: #3e8e41;
+  }
+</style>
+<body>
+
+<form th:method="post" th:action="@{/user/save}" th:object="${users}" >
+
+  <div>
+    <h2>
+      My Details
+    </h2>
+    <h3>
+      Personal Information
+    </h3>
+    <input  hidden type="text" th:field="*{id}" th:value="${currentUser.getId()}">
+
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" th:field="*{fullname}" th:value="${currentUser.getFullname()}" ><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" th:field="*{email}" th:value="${currentUser.getEmail()}" ><br>
+
+    <label for="mobile_no">Mobile Number:</label><br>
+    <input type="text" id="mobile_no" name="mobile_no" th:field="*{mobile_no}" th:value="${currentUser.getMobileNo()}" ><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" th:field="*{password}" th:value="${currentUser.getPassword()}" ><br>
+
+    <!--    <div >-->
+<!--      Name<br> <input type="text" th:field="*{fullname}" th:value="${currentUser.getFullname()}">-->
+<!--    </div>-->
+<!--    <div >-->
+<!--      Phone Number<br>-->
+<!--      <input type ="text" th:field="*{mobile_no}" th:value="${currentUser.getMobileNo()}">-->
+
+<!--    </div>-->
+
+<!--    <div >-->
+<!--      Email Address<br>-->
+<!--      <input type="email" th:field="*{email}" th:value="${currentUser.getEmail()}">-->
+<!--    </div>-->
+<!--    <div class="pw">-->
+<!--      Password<br>-->
+<!--      <input class="info" type="password" th:field="*{password}" th:value="${currentUser.getPassword()}">-->
+<!--    </div>-->
+<!--    <div class="cpw">-->
+<!--      Confirm Password<br>-->
+<!--      <input class="info" type="password">-->
+<!--    </div>-->
+
+
+<!--    <div class="savebuttton">-->
+<!--      <a class="delete" th:href="@{~/user/edit/}+${currentUser.id}">-->
+<!--        <button type="submit">SaveChanges</button>-->
+<!--      </a>-->
+<!--    </div>-->
+    <input type="submit" value="Update Profile">
+    <a th:href="@{'/user/' + ${users.id} + '/delete'}">Delete</a>
+<!--    <div class="deletebuttton">-->
+<!--      <a class="delete " th:href="@{~/user/delete/}+${currentUser.id}">-->
+<!--        <button type="button" >DeleteAccount</button>-->
+<!--      </a>-->
+<!--    </div>-->
+  </div>
+</form>
+</body>
+</html>
+
+<!--<label for="name">Name:</label><br>-->
+<!--<input type="text" id="name" name="name" placeholder="Enter your name"><br>-->
+<!--ruby-->
+<!--Copy code-->
+<!--<label for="email">Email:</label><br>-->
+<!--<input type="email" id="email" name="email" placeholder="Enter your email"><br>-->
+
+<!--<label for="mobile">Mobile No:</label><br>-->
+<!--<input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number"><br>-->
+
+<!--<label for="password">Password:</label><br>-->
+<!--<input type="password" id="password" name="password" placeholder="Enter your password"><br>-->
+
+<!--<input type="submit" value="Update Profile">-->

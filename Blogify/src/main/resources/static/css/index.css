@@ -1,0 +1,28 @@
+
+.container a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.container a{
+    color: #292929;
+}
+
+/*.container a:visited {*/
+/*    color: pink;*/
+/*    background-color: transparent;*/
+/*    text-decoration: none;*/
+/*}*/
+
+.container a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.container a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
