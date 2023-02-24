@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -80,6 +82,19 @@ public class UserController {
     public String deleteProfile(@PathVariable("id") Integer id){
         userService.deleteById(id);
         return "redirect:/logout";
+    }
+    @GetMapping("/index")
+    public String indexPage(Model model, Principal principal, Authentication authentication){
+        if (authentication!=null){
+            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            for (GrantedAuthority grantedAuthority : authorities) {
+                if (grantedAuthority.getAuthority().equals("Admin")) {
+                    return "redirect:/admin";
+                }
+            }
+        }
+        model.addAttribute("userdata",userService.findByEmail(principal.getName()));
+        return "home";
     }
 
 //    @GetMapping("/profile")

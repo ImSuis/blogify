@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class AdminController {
@@ -23,6 +26,7 @@ public class AdminController {
         model.addAttribute("users", users);
         return "admin";
     }
+
 
 //    @GetMapping("/delete/{id}")
 //    public String deleteuser(@PathVariable("id") Integer id){
