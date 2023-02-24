@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class PostServiceImpl implements PostService {
 
     private final UserRepo userRepo;
 
-    public PostPojo savePost(PostPojo postPojo)  {
+    public void savePost(PostPojo postPojo)  {
         Post post = new Post();
         if(postPojo.getId()!=null){
             post.setId(postPojo.getId());
@@ -27,12 +28,12 @@ public class PostServiceImpl implements PostService {
         post.setId(postPojo.getId());
         post.setTitle(postPojo.getTitle());
         post.setBody(postPojo.getBody());
-        post.setCreatedAt(postPojo.getCreatedAt());
+        post.setCreatedAt(LocalDateTime.now());
         post.setUpdatedAt(postPojo.getUpdatedAt());
-//        post.setUser(userRepo.findById(postPojo.getUser()).orElseThrow());
+        post.setUser(postPojo.getUser());
 
         postRepo.save(post);
-        return new PostPojo(post);
+//        return new PostPojo(post);
     }
 
     @Override

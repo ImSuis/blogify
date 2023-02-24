@@ -89,7 +89,9 @@
 <div class="container">
     <h1>Create a post</h1>
     <form th:action="@{/save-post}" th:object="${post}" method="post">
-<!--        <input type="hidden" th:field="*{account}" />-->
+        <input type="hidden" th:value="${postId.id}" name="user" />
+
+<!--        <input type="hidden" th:field="*{user.id}" />-->
         <input type="hidden" th:field="*{createdAt}" />
         <div class="inputbox">
             <span>Title</span>

@@ -1,30 +1,23 @@
 package com.system.blogify.Controller;
 
 import com.system.blogify.Pojo.PostPojo;
-import com.system.blogify.Pojo.UserPojo;
 import com.system.blogify.Service.PostService;
 import com.system.blogify.Service.UserService;
 import com.system.blogify.entity.Post;
 import com.system.blogify.entity.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,10 +27,10 @@ public class PostController {
 
     private final PostService postService;
     @GetMapping("/posts/new")
-    public String createUser(Model model){
+    public String createUser( Model model){
         model.addAttribute("post",new PostPojo());
 
-        return "newpost";
+        return "newPost";
     }
 //
 //    @GetMapping("/posts/new")
@@ -93,16 +86,16 @@ public class PostController {
 //
 //
     @PostMapping("/save-post")
-    public String saveProduct(@Valid PostPojo postPojo, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
+    public String saveProduct(@Valid PostPojo postPojo) throws IOException {
 
-        Map<String, String> requestError = validateRequest(bindingResult);
-        if (requestError != null) {
-            redirectAttributes.addFlashAttribute("requestError", requestError);
-            return "redirect:/";
-        }
+//        Map<String, String> requestError = validateRequest(bindingResult);
+//        if (requestError != null) {
+//            redirectAttributes.addFlashAttribute("requestError", requestError);
+//            return "redirect:";
+//        }
 
         postService.savePost(postPojo);
-        redirectAttributes.addFlashAttribute("successMsg", "User saved successfully");
+//        redirectAttributes.addFlashAttribute("successMsg", "User saved successfully");
 
 
         return "redirect:/";
@@ -125,22 +118,22 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String getPost(@PathVariable("id") Integer id, Model model ){
         Post post = postService.fetchById(id);
-        model.addAttribute("post", new PostPojo(post));
+        model.addAttribute("post", post);
         return "post";
     }
 
     @GetMapping("/posts/{id}/edit")
     public String ePost(@PathVariable("id") Integer id, Model model ){
         Post post = postService.fetchById(id);
-        model.addAttribute("post", new PostPojo(post));
+        User user = userService.fetchbyId(id);
+        model.addAttribute("postId",user);
+        model.addAttribute("post", post);
+        model.addAttribute("edit",new PostPojo());
         return "post_edit";
     }
 
     @PostMapping("/posts/{id}/edit")
     public String editPost(@Valid PostPojo postPojo){
-        Post post = postService.fetchById((postPojo.getId()));
-        post.setBody(postPojo.getBody());
-        post.setTitle(postPojo.getTitle());
         postService.savePost(postPojo);
 //        model.addAttribute("currentUser", new UserPojo(user));
         return "redirect:/posts/{id}";

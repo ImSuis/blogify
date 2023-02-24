@@ -40,11 +40,11 @@ public class Post {
                 '}';
     }
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id",
-//            referencedColumnName = "id",
-//            foreignKey = @ForeignKey(name = "FK_userId"))
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_userId"))
+    private User user;
 
 //    @NotNull
 //    @ManyToOne

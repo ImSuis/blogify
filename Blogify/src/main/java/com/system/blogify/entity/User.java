@@ -1,16 +1,16 @@
 package com.system.blogify.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -40,8 +40,20 @@ public class User implements UserDetails {
 //    @OneToMany(mappedBy = "user")
 //    private List<Post> posts;
 
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "users_roles",
+//            foreignKey = @ForeignKey(name = "FK_users_roles_userId"),
+//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+//            inverseForeignKey = @ForeignKey(name = "FK_users_roles_roleId"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+//            uniqueConstraints = @UniqueConstraint(name = "UNIQUE_users_roles_userIdRoleId",
+//                    columnNames = {"user_id", "role_id"})
+//    )
+//    private Collection<Role> roles;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
         return null;
     }
 

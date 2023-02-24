@@ -6,7 +6,7 @@ import com.system.blogify.entity.Post;
 import java.util.List;
 
 public interface PostService{
-    PostPojo savePost(PostPojo postPojo);
+    void savePost(PostPojo postPojo);
 
     Post fetchById(Integer id);
 

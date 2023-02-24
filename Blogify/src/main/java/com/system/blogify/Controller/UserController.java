@@ -55,13 +55,13 @@ public class UserController {
         return "redirect:/user/profile";
     }
 
-    @GetMapping("/profile")
-    public String profile() {
-        return "updateprofile";
-    }
+//    @GetMapping("/profile")
+//    public String profile() {
+//        return "updateprofile";
+//    }
 
     @GetMapping("/profile/{id}")
-    public String getUserProfiile(@PathVariable("id") Integer id, Model model ){
+    public String getUserProfile(@PathVariable("id") Integer id, Model model ){
         User user = userService.fetchbyId(id);
         model.addAttribute("users", new UserPojo(user));
 //        model.addAttribute("user", userServices.findByEmail(principal.getName()));
@@ -74,12 +74,12 @@ public class UserController {
     public String editUser(@PathVariable("id") Integer id, Model model){
         User user =userService.fetchbyId(id);
         model.addAttribute("currentUser", new UserPojo(user));
-        return "redirect:/user/profile/{id}";
+        return "redirect:/";
     }
     @GetMapping("/{id}/delete")
     public String deleteProfile(@PathVariable("id") Integer id){
         userService.deleteById(id);
-        return "redirect:/";
+        return "redirect:/logout";
     }
 
 //    @GetMapping("/profile")

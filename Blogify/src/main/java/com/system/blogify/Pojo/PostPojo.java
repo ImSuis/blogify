@@ -1,6 +1,7 @@
 package com.system.blogify.Pojo;
 
 import com.system.blogify.entity.Post;
+import com.system.blogify.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,14 +20,14 @@ public class PostPojo {
     private LocalDateTime createdAt;
     private  LocalDateTime updatedAt;
 
-//    private Integer user;
+    private User user;
 
-    public PostPojo(Post post){
-        this.id = post.getId();
-        this.title = post.getTitle();
-        this.body = post.getBody();
-        this.createdAt = post.getCreatedAt();
-        this.updatedAt = post.getUpdatedAt();
+//    public PostPojo(Post post){
+//        this.id = post.getId();
+//        this.title = post.getTitle();
+//        this.body = post.getBody();
+//        this.createdAt = post.getCreatedAt();
+//        this.updatedAt = post.getUpdatedAt();
 //        this.user = post.getUser().getId();
-    }
+//    }
 }

@@ -9,8 +9,10 @@
 <body>
 <div class="container">
   <a th:href="@{/}">Home</a>
-  <form action="#" th:action="@{'/posts/{id}/edit'(id=${post.id})}" th:object="${post}" method="post">
+  <form action="#" th:action="@{'/posts/{id}/edit'(id=${post.id})}" th:object="${edit}" method="post">
 <!--    <input type="hidden" th:field="*{account}" />-->
+      <input type="hidden" th:value="${postId.id}" name="user" />
+      <input type="hidden" th:value="${post.id}" name="post" />
     <input type="hidden" th:field="*{createdAt}" />
     <h2>Update Post</h2>
     <div>
